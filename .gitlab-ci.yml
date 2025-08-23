@@ -1,0 +1,19 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build_job:
+  stage: build
+  script:
+    - echo "Baue das Projekt... (eigentlich nicht)"
+
+test_job:
+  stage: test
+  script:
+    - echo "Führe Tests aus... (eigentlich auch nicht)"
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploye... (auch nicht wirklich)"
