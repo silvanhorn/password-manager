@@ -40,7 +40,7 @@ def interface(password="unknown"):
     submit_button = ttk.Button(button_frame, text="Generieren", width=15, command=lambda: logic.entry_get("UI", length_input))
     submit_button.grid(row=0, column=0, padx=5, pady=5)
 
-    db_button = ttk.Button(button_frame, text="Datenbank anzeigen", width=15, command=lambda: on_watch_db_clicked(root))
+    db_button = ttk.Button(button_frame, text="Datenbank anzeigen", width=15, command=lambda: on_watch_db_clicked(globals.root))
     db_button.grid(row=0, column=1, padx=5, pady=5)
 
     root.bind("<Return>", lambda event: logic.entry_get("UI", length_input))
@@ -49,12 +49,14 @@ def interface(password="unknown"):
 
 
 def on_watch_db_clicked(window):
-    global iteration
-    iteration += 1
-    if iteration > 1:
-        return
+    #global iteration
+    #iteration += 1
+    #print(iteration)
+    #if iteration > 1:
+     #   return
 
     if len(globals.rows) > 7:
+        print(globals.rows)
         window.geometry("700x700")
 
     labels_frame = ttk.Frame(window)
@@ -66,14 +68,15 @@ def on_watch_db_clicked(window):
         lbl.pack(pady=2)
         labels.append(lbl)
 
-    disable_db_display = ttk.Button(window, text="Verbergen", command=lambda: hide(labels, disable_db_display, window))
+    disable_db_display = ttk.Button(window, text="Verbergen", command=lambda: hide(labels, labels_frame, disable_db_display, window))
     disable_db_display.pack(pady=10)
 
 
-def hide(labels, button, window):
+def hide(labels, base_label, button, window):
     global iteration
     for lbl in labels:
         lbl.destroy()
+    base_label.destroy()
     button.destroy()
     iteration = 0
     window.geometry("450x350")
